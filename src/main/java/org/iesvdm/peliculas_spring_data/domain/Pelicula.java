@@ -24,10 +24,10 @@ public class Pelicula {
     private String titulo;
 
     @ManyToMany
-   /* @JoinTable(
+    @JoinTable(
             name = "pelicula_categoria",
-            joinColumns = @JoinColumn(name = "id_pelicula", referencedColumnName = "id_pelicula"),
-            inverseJoinColumns = @JoinColumn (name = "id_categoria", referencedColumnName = "id_categoria")
-    )*/
+            joinColumns = @JoinColumn(name = "id_pelicula", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn (name = "id_categoria", referencedColumnName = "id")
+    )
     private Set<Categoria> categorias = new HashSet<>();
 }
