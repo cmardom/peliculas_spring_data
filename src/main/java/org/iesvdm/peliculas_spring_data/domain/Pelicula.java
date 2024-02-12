@@ -2,6 +2,7 @@ package org.iesvdm.peliculas_spring_data.domain;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,4 +31,7 @@ public class Pelicula {
             inverseJoinColumns = @JoinColumn (name = "id_categoria", referencedColumnName = "id")
     )
     private Set<Categoria> categorias = new HashSet<>();
+
+    @ManyToOne
+    private Idioma idioma;
 }

@@ -1,8 +1,10 @@
 package org.iesvdm.peliculas_spring_data;
 
 import org.iesvdm.peliculas_spring_data.domain.Categoria;
+import org.iesvdm.peliculas_spring_data.domain.Idioma;
 import org.iesvdm.peliculas_spring_data.domain.Pelicula;
 import org.iesvdm.peliculas_spring_data.repository.CategoriaRepository;
+import org.iesvdm.peliculas_spring_data.repository.IdiomaRepository;
 import org.iesvdm.peliculas_spring_data.repository.PeliculaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ class PeliculasSpringDataApplicationTests {
 
     @Autowired
     CategoriaRepository categoriaRepository;
+
+    @Autowired
+    IdiomaRepository idiomaRepository;
     @Test
     void contextLoads() {
     }
@@ -25,7 +30,7 @@ class PeliculasSpringDataApplicationTests {
 
     @Test
     void guardarManyToMany(){
-        Pelicula pelicula1 = new Pelicula(0, "peli1", new HashSet<>());
+        Pelicula pelicula1 = new Pelicula(0, "peli1", new HashSet<>(), null);
         peliculaRepository.save(pelicula1);
 
         Categoria categoria = new Categoria(0, "categoria1", new HashSet<>());
@@ -46,5 +51,26 @@ class PeliculasSpringDataApplicationTests {
 
 
     }
+
+
+    @Test
+    void guardarManyToOne(){
+        Pelicula pelicula1 = new Pelicula(0, "peli1", new HashSet<>(), null);
+        peliculaRepository.save(pelicula1);
+
+
+        Idioma idioma = new Idioma(0, "inglés", new HashSet<>());
+        idioma.getPeliculas().add(pelicula1);
+        idiomaRepository.save(idioma);
+
+
+        pelicula1.setIdioma(idioma);
+        peliculaRepository.save(pelicula1);
+
+
+
+
+    }
+
 
 }
