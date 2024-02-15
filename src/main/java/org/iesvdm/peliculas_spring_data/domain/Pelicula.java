@@ -34,4 +34,12 @@ public class Pelicula {
 
     @ManyToOne
     private Idioma idioma;
+
+    @ManyToMany
+    @JoinTable(
+            name ="pelicula_actor",
+            joinColumns = @JoinColumn(name = "id_pelicula", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn (name = "id_actor", referencedColumnName = "id")
+    )
+    private Set<Actor> actores = new HashSet<>();
 }
